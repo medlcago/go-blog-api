@@ -11,11 +11,13 @@ type User interface {
 	CreateUser(username, password string) (*models.User, error)
 	FindUserByUsername(username string) (*models.User, error)
 	FindAllUsers(p pagination.LimitOffsetPaginator) ([]models.User, int64, error)
+	FindUserById(id uint64) (*models.User, error)
 }
 
 type Post interface {
 	CreatePost(userId uint64, title, content string) (*models.Post, error)
 	FindAllPosts(pagination.LimitOffsetPaginator) ([]models.Post, int64, error)
+	FindPostById(uint64) (*models.Post, error)
 }
 
 type Repository struct {

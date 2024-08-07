@@ -64,3 +64,27 @@ func (pc *PostsController) GetPosts(c *gin.Context) {
 
 	c.JSON(http.StatusOK, posts)
 }
+
+func (pc *PostsController) GetPostById(c *gin.Context) {
+	var postRequest struct {
+		Id uint64 `uri:"id" binding:"required"`
+	}
+
+	if err := c.ShouldBindUri(&postRequest); err != nil {
+		c.JSON(http.StatusBadRequest, types.AppError{
+			Code:    http.StatusBadRequest,
+			Message: err.Error(),
+		})
+		return
+	}
+	post, err := pc.postService.FetchPostById(postRequest.Id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, types.AppError{
+			Code:    http.StatusNotFound,
+			Message: err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, post)
+}

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"go-blog-api/internal/app/models"
 	"go-blog-api/internal/app/repositories"
 	"go-blog-api/internal/app/types"
 	"go-blog-api/internal/app/utils/pagination"
@@ -26,4 +27,9 @@ func (u *UserService) FetchUsers(pg pagination.LimitOffsetPaginator) (types.Pagi
 		Items: users,
 	}, nil
 
+}
+
+func (u *UserService) FetchUserById(id uint64) (*models.User, error) {
+	user, err := u.userRepository.FindUserById(id)
+	return user, err
 }

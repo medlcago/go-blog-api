@@ -35,3 +35,11 @@ func (postRepository *PostRepository) FindAllPosts(pg pagination.LimitOffsetPagi
 
 	return posts, count, nil
 }
+
+func (postRepository *PostRepository) FindPostById(id uint64) (*models.Post, error) {
+	var post models.Post
+	if err := postRepository.db.Preload("User").First(&post, id).Error; err != nil {
+		return nil, err
+	}
+	return &post, nil
+}

@@ -35,3 +35,11 @@ func (p *PostService) FetchPosts(pg pagination.LimitOffsetPaginator) (types.Pagi
 		Items: posts,
 	}, nil
 }
+
+func (p *PostService) FetchPostById(id uint64) (*models.Post, error) {
+	post, err := p.postRepository.FindPostById(id)
+	if err != nil {
+		return nil, err
+	}
+	return post, nil
+}

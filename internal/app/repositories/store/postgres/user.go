@@ -46,3 +46,11 @@ func (userRepository *UserRepository) FindAllUsers(pg pagination.LimitOffsetPagi
 
 	return users, count, nil
 }
+
+func (userRepository *UserRepository) FindUserById(id uint64) (*models.User, error) {
+	var user models.User
+	if err := userRepository.db.Where("id = ?", id).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
+}

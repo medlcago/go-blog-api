@@ -16,10 +16,12 @@ type AuthService interface {
 type PostService interface {
 	CreatePost(userId uint64, title, content string) (*models.Post, error)
 	FetchPosts(pagination.LimitOffsetPaginator) (types.PaginationResponse, error)
+	FetchPostById(uint64) (*models.Post, error)
 }
 
 type UserService interface {
 	FetchUsers(p pagination.LimitOffsetPaginator) (types.PaginationResponse, error)
+	FetchUserById(id uint64) (*models.User, error)
 }
 
 type Service struct {

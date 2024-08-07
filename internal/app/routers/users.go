@@ -9,4 +9,5 @@ func SetupUserRoutes(r *gin.RouterGroup, userController controllers.UsersControl
 	router := r.Group("/users")
 
 	router.GET("/", userController.GetUsers)
+	router.GET("/:id", userController.GetUserById)
 }

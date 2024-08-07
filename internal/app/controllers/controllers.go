@@ -14,10 +14,12 @@ type AuthController interface {
 type PostsController interface {
 	CreatePost(c *gin.Context)
 	GetPosts(c *gin.Context)
+	GetPostById(c *gin.Context)
 }
 
 type UsersController interface {
 	GetUsers(c *gin.Context)
+	GetUserById(c *gin.Context)
 }
 
 type Controller struct {
